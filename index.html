@@ -10,41 +10,50 @@
      
 <!-- Header Section -->
 
-<!-- Game Section -->
-
-<!-- Left Hand Details Section -->
-<div>
-    <!-- Player -->
-
-    <div>
-
-    </div>
-
-    <!-- Current Score -->
-
-    <div>
-
-    </div>
-
-    <!-- Win or Loss -->
-
-    <div>
-
-    </div>
-
-    <!-- Roll Button -->
-
-    <button></button>
-
+<div id="mainHeader">
+    <h1>Welcome to Mark's Diabolical Dice Game!</h1>
+    <p>Try to roll to 20, without rolling a 1. If you roll a 1 - Game over! To begin playing, click "Roll Dice"...</p>
 </div>
 
-<!-- Right Hand Dice Section -->
+<!-- Game Section -->
 
-<div>
+<div id="gameSection">
 
-    <!-- Dice Image -->
+    <!-- Left Hand Details Section -->
+    <div id="leftSide">
+        <!-- Player -->
 
-    <img src="" alt="" />
+        <div>
+            <h3>Player One</h3>
+        </div>
+
+        <!-- Current Score -->
+
+        <div>
+            <h4 id="currentScore"></h4>
+        </div>
+
+        <!-- Roll Button -->
+
+        <button id="rollButton">Roll the Die</button>
+
+
+
+    </div>
+
+    <!-- Right Hand Dice Section -->
+
+    <div id="rightSide">
+
+        <!-- Dice Image -->
+
+        <div>
+            <p id="resultMessage"></p>
+        </div>
+
+        <div id="imageContainer"></div>
+
+    </div>
 
 </div>
 
