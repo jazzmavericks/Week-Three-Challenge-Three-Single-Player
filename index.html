@@ -4,48 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css"
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    
 <!-- Header Section -->
-
-<!-- Game Section -->
-
-<!-- Left Hand Details Section -->
-<div>
-    <!-- Player -->
-
-    <div>
-
-    </div>
-
-    <!-- Current Score -->
-
-    <div>
-
-    </div>
-
-    <!-- Win or Loss -->
-
-    <div>
-
-    </div>
-
-    <!-- Roll Button -->
-
-    <button></button>
-
+<div id="mainHeader">
+    <h1>Welcome to Mark's Diabolical Dice Game!</h1>
+    <p>Try to roll to 20, without rolling a 1. If you roll a 1 - Game over! To begin playing, click "Roll Dice"...</p>
 </div>
 
-<!-- Right Hand Dice Section -->
+<!-- Game Section -->
+<div id="gameSection">
+    <!-- Left Hand Details Section -->
+    <div id="leftSide">
+        <!-- Player -->
+        <h3>Player One</h3>
 
-<div>
+        <!-- Current Score -->
+        <h4 id="currentScore">0</h4>
 
-    <!-- Dice Image -->
+        <!-- Roll Button -->
+        <button id="rollButton">Roll Die</button>
+    </div>
 
-    <img src="" alt="" />
+    <!-- Right Hand Dice Section -->
+    <div id="rightSide">
+        <!-- Win or Loss -->
+        <p id="resultMessage"></p>
 
+        <!-- Dice Image Container -->
+        <div id="imageContainer">
+            <!-- Dice Image -->
+            <img src="" alt="" />
+        </div>
+    </div>
 </div>
 
 <script src="main.js"></script>
