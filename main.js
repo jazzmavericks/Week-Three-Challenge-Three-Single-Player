@@ -9,8 +9,8 @@ const imageSources = ['die1.gif', 'die2.gif', 'die3.gif', 'die4.gif', 'die5.gif'
 
 const startingImageSource = 'diceStart.png';
 
-let currentPlayer = player1; // Set's Player One as the first player
-document.getElementById("player1").classList.add("active"); 
+let currentPlayer = player1; // Set Player One as the first player
+document.getElementById("player1").classList.add("active");
 
 rollButton.addEventListener("click", () => {
     if (!currentPlayer.gameOver) {
@@ -27,14 +27,15 @@ rollButton.addEventListener("click", () => {
             currentPlayer.currentScore += roll;
             currentScoreElement.textContent = currentPlayer.currentScore;
 
-            // Check if the current player's score is 20 or more
             if (currentPlayer.currentScore >= 20) {
                 currentPlayer.gameOver = true;
-                winMessage.textContent = `Player ${currentPlayer === player1 ? 1 : 2} wins with a score of ${currentPlayer.currentScore}!`;
+                winMessage.textContent = `Player ${currentPlayer === player1 ? 1 : 2} wins with a score of ${currentPlayer.finalScore}!`;
                 rollButton.disabled = true;
                 passButton.disabled = true;
             }
         }
+    } else {
+        resetGame(); // Reset the game if it's over
     }
 });
 
@@ -48,6 +49,8 @@ passButton.addEventListener("click", () => {
             rollButton.disabled = true;
             passButton.disabled = true;
         }
+    } else {
+        resetGame(); // Reset the game if it's over
     }
 });
 
@@ -71,10 +74,25 @@ displayStartingImage();
 
 function switchPlayer() {
     currentPlayer = currentPlayer === player1 ? player2 : player1;
-
     document.getElementById("player1").classList.toggle("active");
     document.getElementById("player2").classList.toggle("active");
 }
+
+function resetGame() {
+    player1.currentScore = 0;
+    player1.finalScore = 0;
+    player1.gameOver = false;
+    player2.currentScore = 0;
+    player2.finalScore = 0;
+    player2.gameOver = false;
+    winMessage.textContent = ''; // Clear any win message
+    document.getElementById("currentScore1").textContent = '0';
+    document.getElementById("currentScore2").textContent = '0';
+    rollButton.disabled = false;
+    passButton.disabled = false;
+    displayStartingImage(); // Show the starting image
+}
+
 
 
 
