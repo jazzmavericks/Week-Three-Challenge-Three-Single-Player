@@ -6,57 +6,32 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css"
 </head>
+
 <body>
-     
-<!-- Header Section -->
-
-<div id="mainHeader">
-    <h1>Welcome to Mark's Diabolical Dice Game!</h1>
-    <p>Try to roll to 20, without rolling a 1. If you roll a 1 - Game over! To begin playing, click "Roll Dice"...</p>
-</div>
-
-<!-- Game Section -->
-
-<div id="gameSection">
-
-    <!-- Left Hand Details Section -->
-    <div id="leftSide">
-        <!-- Player -->
-
-        <div>
-            <h3>Player One</h3>
-        </div>
-
-        <!-- Current Score -->
-
-        <div>
-            <h4 id="currentScore"></h4>
-        </div>
-
-        <!-- Roll Button -->
-
-        <button id="rollButton">Roll the Die</button>
-
-
-
+    <!-- Header Section -->
+    <div id="mainHeader">
+        <h1>Die 2: Even Diabolicaler</h1>
     </div>
 
-    <!-- Right Hand Dice Section -->
-
-    <div id="rightSide">
-
-        <!-- Dice Image -->
-
-        <div>
-            <p id="resultMessage"></p>
+    <!-- Game Section -->
+    <div id="playersSection">
+        <div class="player" id="player1">
+            <h2>PLAYER 1</h2>
+            <div class="current-score" id="currentScore1">0</div>
         </div>
-
-        <div id="imageContainer"></div>
-
+        <div id="imageContainer">
+            <img src="diceStart.png" alt="Die Image" />
+        </div>
+        <div class="player" id="player2">
+            <h2>PLAYER 2</h2>
+            <div class="current-score" id="currentScore2">0</div>
+        </div>
     </div>
-
-</div>
-
-<script src="main.js"></script>
+    <div id="buttonsRow">
+        <button id="rollButton">Roll Die</button>
+        <button id="passButton">Pass Control</button>
+    </div>
+    <p id="winMessage"></p>
+    <script src="main.js"></script>
 </body>
 </html>

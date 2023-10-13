@@ -1,5 +1,15 @@
 body {
+    text-align: center;
     background-color: black;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 46px;
 }
 
 #mainHeader {
@@ -18,58 +28,50 @@ body {
     color: rgb(255, 255, 255);
 }
 
-#gameSection {
+#playersSection {
     display: flex;
-    justify-content:space-between;
-    background-color: black;
+    justify-content: space-around;
+    margin-top: 20px;
+    height: 300px;
 }
 
-#rightSide {
+#buttonsRow {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 50%;
-    color: white;
-    background-color: black;
+    justify-content:center;
+    margin-top: 20px;
 }
 
-#resultMessage {
-    font-size: 30px;
-    color: red;
-    text-align: center;
-    margin-top: 30px;
+.player {
+    border: 2px solid #333;
+    padding: 40px;
+    width: 33%;
+    background-color: white;
 }
 
-#leftSide {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    color: white;
-    background-color: black;
-}
-
-#leftSide h3 {
-    font-size: 60px;
-    text-align: center;
+button {
     margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
 }
 
-#leftSide h4 {
-    font-size: 50px;
-    color: red;
-    text-align: center;
-    margin: 20px;
+#winMessage {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
 }
 
-#rollButton {
-    padding: 10px;
-    font-size: 30px;
+.active {
+    background-color: red;
+    color: white;
+}
+
+.current-score {
+    font-size: 54px;
 }
 
 #imageContainer {
+    display:flex;
     width: 80%;
-    margin: 10px;
+    justify-content: center;
 }
