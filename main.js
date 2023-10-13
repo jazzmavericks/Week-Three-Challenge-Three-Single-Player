@@ -1,74 +1,51 @@
-const rollButton = document.getElementById('rollButton');
-const resultMessage = document.getElementById("resultMessage");
-const currentScore = document.getElementById("currentScore");
-const gif = document.getElementById('gif');
-const imageContainer = document.getElementById('imageContainer');
+const player1 = { currentScore: 0, finalScore: 0, gameOver: false };
+const player2 = { currentScore: 0, finalScore: 0, gameOver: false };
+const rollButton = document.getElementById("rollButton");
+const passButton = document.getElementById("passButton");
+const winMessage = document.getElementById("winMessage");
 
-const imageSources = ['die1.gif', 'die2.gif', 'die3.gif', 'die4.gif', 'die5.gif', 'die6.gif'];
+let currentPlayer = player1; // Set's Player One as the first player
+document.getElementById("player1").classList.add("active"); 
 
-const startingImageSource = 'diceStart.png';
+rollButton.addEventListener("click", () => {
+    if (!currentPlayer.gameOver) {
+        const roll = Math.floor(Math.random() * 6) + 1;
 
-let rollingScore = 0; // The rolling score is zero at the start
+        const currentScoreElement = document.getElementById(`currentScore${currentPlayer === player1 ? 1 : 2}`);
+        currentScoreElement.textContent = roll;
 
-
-// Roll the die function
-function rollDie() {
-    const result = Math.floor(Math.random() * 6) + 1;
-    displayImage(result - 1);
-    rollingScore += result; // Adds the random number to the rolling score
-    currentScore.textContent = rollingScore; // Outputs the rolling score
-
-    if (result === 1) { // If the random number is one, then
-        resultMessage.textContent = "Game Over! You rolled a one!";
-        rollButton.textContent = "Restart Game";
-        rollButton.removeEventListener('click', rollDie); //Removes the roll die button, as the game needs to restart
-        rollButton.addEventListener('click', startGame); //Enables the start game button 
-        rollButton.disabled = false;
-    } else if (rollingScore >= 20) { // If the rolling score is 20 or more, then
-        resultMessage.textContent = "Congratulations! You made it to 20 points without rolling a 1!";
-        rollButton.textContent = "Restart Game";
-        rollButton.removeEventListener('click', rollDie); //Removes the roll die button, as the game needs to restart
-        rollButton.addEventListener('click', startGame); //Enables the start game button
-        rollButton.disabled = false;
+        if (roll === 1) {
+            currentPlayer.gameOver = true;
+            currentScoreElement.textContent = "1 (Game Over)";
+            togglePlayer();
+        } else {
+            currentPlayer.currentScore += roll;
+            currentScoreElement.textContent = currentPlayer.currentScore;
+        }
     }
+});
+
+passButton.addEventListener("click", () => {
+    if (!currentPlayer.gameOver) {
+        currentPlayer.finalScore = currentPlayer.currentScore;
+        togglePlayer();
+
+        if (currentPlayer.gameOver) {
+            winMessage.textContent = `Player ${currentPlayer === player1 ? 1 : 2} wins with a score of ${currentPlayer.finalScore}!`;
+            rollButton.disabled = true;
+            passButton.disabled = true;
+        }
+    }
+});
+
+function togglePlayer() {
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+
+    document.getElementById("player1").classList.toggle("active");
+    document.getElementById("player2").classList.toggle("active");
 }
 
 
-// Start the game function
-function startGame() {
-    resultMessage.textContent = "";
-    rollButton.textContent = "Roll Die";
-    currentScore.textContent = "0";
-    rollButton.removeEventListener('click', startGame);
-    rollButton.addEventListener('click', rollDie);
-    rollingScore = 0;
-    displayStartingImage();
-    rollButton.disabled = false;
-}
-
-
-// Function to display the starting image of a die on 1
-function displayStartingImage() {
-    imageContainer.innerHTML = '';
-    const img = new Image();
-    img.src = startingImageSource;
-    imageContainer.appendChild(img);
-}
-
-
-// Dice gif roll
-function displayImage(index) {
-    imageContainer.innerHTML = '';
-    const img = new Image();
-    img.src = imageSources[index];
-    imageContainer.appendChild(img);
-}
-
-displayStartingImage();
-
-
-// Add an event listener to the button to start the game when clicked
-rollButton.addEventListener('click', startGame);
 
 
 
