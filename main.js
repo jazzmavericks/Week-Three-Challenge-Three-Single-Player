@@ -1,60 +1,47 @@
-const player1 = { currentScore: 0, finalScore: 0, gameOver: false };
-const player2 = { currentScore: 0, finalScore: 0, gameOver: false };
-const rollButton = document.getElementById("rollButton");
-const passButton = document.getElementById("passButton");
-const winMessage = document.getElementById("winMessage");
+const rollButton = document.getElementById('rollButton');
+const resultMessage = document.getElementById("resultMessage");
+const currentScore = document.getElementById("currentScore");
+const gif = document.getElementById('gif');
 const imageContainer = document.getElementById('imageContainer');
 
 const imageSources = ['die1.gif', 'die2.gif', 'die3.gif', 'die4.gif', 'die5.gif', 'die6.gif'];
 
 const startingImageSource = 'diceStart.png';
 
-let currentPlayer = player1; // Set Player One as the first player
-document.getElementById("player1").classList.add("active");
+let rollingScore = 0; // The rolling score is zero at the start
 
-rollButton.addEventListener("click", () => {
-    if (!currentPlayer.gameOver) {
-        const roll = Math.floor(Math.random() * 6) + 1;
-        displayImage(roll - 1);
-        const currentScoreElement = document.getElementById(`currentScore${currentPlayer === player1 ? 1 : 2}`);
-        currentScoreElement.textContent = roll;
+function rollDie() {
+    const result = Math.floor(Math.random() * 6) + 1;
+    displayImage(result - 1);
+    rollingScore += result;
+    currentScore.textContent = rollingScore;
 
-        if (roll === 1) {
-            currentPlayer.gameOver = true;
-            currentScoreElement.textContent = "1 (Game Over)";
-            switchPlayer();
-        } else {
-            currentPlayer.currentScore += roll;
-            currentScoreElement.textContent = currentPlayer.currentScore;
-
-            if (currentPlayer.currentScore >= 20) {
-                currentPlayer.gameOver = true;
-                winMessage.textContent = `Player ${currentPlayer === player1 ? 1 : 2} wins with a score of ${currentPlayer.finalScore}!`;
-                rollButton.disabled = true;
-                passButton.disabled = true;
-            }
-        }
-    } else {
-        resetGame(); // Reset the game if it's over
+    if (result === 1) {
+        resultMessage.textContent = "Game Over! You rolled a one!";
+        rollButton.textContent = "Restart Game";
+        rollButton.removeEventListener('click', rollDie);
+        rollButton.addEventListener('click', startGame);
+        rollButton.disabled = false;
+    } else if (rollingScore >= 20) {
+        resultMessage.textContent = "Congratulations! You made it to 20 points without rolling a 1!";
+        rollButton.textContent = "Restart Game";
+        rollButton.removeEventListener('click', rollDie);
+        rollButton.addEventListener('click', startGame);
+        rollButton.disabled = false;
     }
-});
+}
 
-passButton.addEventListener("click", () => {
-    if (!currentPlayer.gameOver) {
-        currentPlayer.finalScore = currentPlayer.currentScore;
-        switchPlayer();
+function startGame() {
+    resultMessage.textContent = "";
+    rollButton.textContent = "Roll Die";
+    currentScore.textContent = "0";
+    rollButton.removeEventListener('click', startGame);
+    rollButton.addEventListener('click', rollDie);
+    rollingScore = 0;
+    displayStartingImage();
+    rollButton.disabled = false;
+}
 
-        if (currentPlayer.gameOver) {
-            winMessage.textContent = `Player ${currentPlayer === player1 ? 1 : 2} wins with a score of ${currentPlayer.finalScore}!`;
-            rollButton.disabled = true;
-            passButton.disabled = true;
-        }
-    } else {
-        resetGame(); // Reset the game if it's over
-    }
-});
-
-// Function to display the starting image of a die on 1
 function displayStartingImage() {
     imageContainer.innerHTML = '';
     const img = new Image();
@@ -62,7 +49,6 @@ function displayStartingImage() {
     imageContainer.appendChild(img);
 }
 
-// Dice gif roll
 function displayImage(index) {
     imageContainer.innerHTML = '';
     const img = new Image();
@@ -72,31 +58,4 @@ function displayImage(index) {
 
 displayStartingImage();
 
-function switchPlayer() {
-    currentPlayer = currentPlayer === player1 ? player2 : player1;
-    document.getElementById("player1").classList.toggle("active");
-    document.getElementById("player2").classList.toggle("active");
-}
-
-function resetGame() {
-    player1.currentScore = 0;
-    player1.finalScore = 0;
-    player1.gameOver = false;
-    player2.currentScore = 0;
-    player2.finalScore = 0;
-    player2.gameOver = false;
-    winMessage.textContent = ''; // Clear any win message
-    document.getElementById("currentScore1").textContent = '0';
-    document.getElementById("currentScore2").textContent = '0';
-    rollButton.disabled = false;
-    passButton.disabled = false;
-    displayStartingImage(); // Show the starting image
-}
-
-
-
-
-
-
-
-
+rollButton.addEventListener('click', startGame);
