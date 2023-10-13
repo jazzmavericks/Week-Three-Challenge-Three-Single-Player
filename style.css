@@ -70,6 +70,8 @@ button {
     font-size: 54px;
 }
 
-#dieImage img {
-    height: 300px;
+#imageContainer {
+    display:flex;
+    width: 80%;
+    justify-content: center;
 }
